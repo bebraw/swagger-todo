@@ -1,7 +1,5 @@
 'use strict';
 
-var url = require('url');
-
 var express = require('express');
 var errorHandler = require('errorhandler');
 var bodyParser = require('body-parser');
