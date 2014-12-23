@@ -1,0 +1,25 @@
+{
+  "name": "koodilehto-crm-backend",
+  "description": "",
+  "author": "Juho Vepsalainen <bebraw@gmail.com>",
+  "version": "0.0.0",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koodilehto/koodilehto-crm-backend.git"
+  },
+  "homepage": "https://github.com/koodilehto/koodilehto-crm-backend",
+  "bugs": {
+    "url": "https://github.com/koodilehto/koodilehto-crm-backend/issues"
+  },
+  "keywords": [],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/koodilehto/koodilehto-crm-backend/blob/master/LICENSE"
+    }
+  ]
+}
