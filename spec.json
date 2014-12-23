@@ -1,0 +1,340 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Koodilehto CRM API",
+        "description": "Manage your clients and invoices using Koodilehto CRM API",
+        "version": "1.0.0"
+    },
+    "host": "api.koodilehto.fi",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/clients": {
+            "get": {
+                "summary": "Clients",
+                "description": "The Clients endpoint returns information about clients the user is affiliated with. The response includes basic details of each client, such as name, in chronological order.\n",
+                "tags": [
+                    "Clients"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of clients",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Client"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Clients",
+                "description": "The Clients endpoint allows you to create a new client to the system.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/definitions/Client"
+                    }
+                ],
+                "tags": [
+                    "Clients"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Id of the created client",
+                        "schema": {
+                            "$ref": "#/definitions/Id"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Clients",
+                "description": "The Clients endpoint allows you to update a client already existing in the system.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/definitions/Client"
+                    }
+                ],
+                "tags": [
+                    "Clients"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Id of the updated client",
+                        "schema": {
+                            "$ref": "#/definitions/Id"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/invoices": {
+            "get": {
+                "summary": "Invoices",
+                "description": "The Invoices endpoint returns information about invoices the user is affiliated with. The response includes basic details of each invoice, such as sender and receiver information, and includes information about its state in chronological order.\n",
+                "tags": [
+                    "Invoices"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of invoices",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Invoice"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Invoices",
+                "description": "The Invoices endpoint allows you to create a new client to the system.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/definitions/Invoice"
+                    }
+                ],
+                "tags": [
+                    "Invoices"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Id of the created invoice",
+                        "schema": {
+                            "$ref": "#/definitions/Id"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Invoices",
+                "description": "The Invoices endpoint allows you to update an invoice already existing in the system.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/definitions/Invoice"
+                    }
+                ],
+                "tags": [
+                    "Invoices"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Id of the updated invoice",
+                        "schema": {
+                            "$ref": "#/definitions/Id"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Id": {
+            "type": "string",
+            "description": "Unique identifier"
+        },
+        "Invoice": {
+            "required": [
+                "sender",
+                "receiver",
+                "items",
+                "due",
+                "paymentDays"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier"
+                },
+                "invoiceId": {
+                    "type": "number",
+                    "description": "Unique invoice id generated internally by the backend",
+                    "readOnly": true
+                },
+                "status": {
+                    "$ref": "#/definitions/InvoiceStatus",
+                    "readOnly": true
+                },
+                "sender": {
+                    "$ref": "#/definitions/User"
+                },
+                "receiver": {
+                    "$ref": "#/definitions/Client"
+                },
+                "items": {
+                    "type": "array",
+                    "description": "Billable items attached to the invoice",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/InvoiceItem"
+                    }
+                },
+                "due": {
+                    "type": "string",
+                    "description": "Day in which the invoice is due"
+                },
+                "paymentDays": {
+                    "type": "number",
+                    "description": "Amount of days to pay the bill",
+                    "default": 8
+                }
+            }
+        },
+        "InvoiceStatus": {
+            "type": "string",
+            "enum": [
+                "WAITING_TO_BE_SENT",
+                "SENT",
+                "WAITING_PAYMENT",
+                "RECEIVED_PAYMENT"
+            ]
+        },
+        "InvoiceItem": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description of the item to invoice"
+                },
+                "cost": {
+                    "type": "number",
+                    "description": "Basic cost of the item to invoice"
+                },
+                "vat": {
+                    "default": 0,
+                    "type": "number",
+                    "description": "Possible VAT of the item to invoice. Defaults to zero."
+                }
+            }
+        },
+        "User": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Full name of the user"
+                },
+                "invoicingId": {
+                    "type": "number",
+                    "description": "Invoicing id that is unique per user"
+                }
+            }
+        },
+        "Client": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the client"
+                },
+                "address": {
+                    "type": "string",
+                    "description": "Address of the client"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "City of the client"
+                },
+                "postalCode": {
+                    "type": "string",
+                    "description": "Postal code of the client"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number of the client"
+                },
+                "companyId": {
+                    "type": "string",
+                    "description": "Company id of the client"
+                },
+                "iban": {
+                    "type": "string",
+                    "description": "IBAN code of the client"
+                },
+                "bic": {
+                    "type": "string",
+                    "description": "BIC/SWIFT code of the client"
+                },
+                "language": {
+                    "$ref": "#/definitions/Language",
+                    "description": "Language of the client"
+                }
+            }
+        },
+        "Language": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier"
+                },
+                "name": {
+                    "type": "string",
+                    "enum": [
+                        "en-en",
+                        "fi-fi"
+                    ],
+                    "readOnly": true
+                }
+            }
+        },
+        "Error": {
+            "properties": {
+                "error": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

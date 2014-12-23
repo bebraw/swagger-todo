@@ -1,17 +1,22 @@
 'use strict';
 
+var fp = require('annofp');
 
-module.exports = {
-    swagger: 2.0,
-    info: {
-        title: 'Koodilehto CRM API'
-    },
-    paths: {
-        '/clients': {
-            get: {
-                summary: 'Get clients',
-                operationId: 'getClients'
-            }
-        }
-    }
-};
+var spec = require('./spec.json');
+
+
+module.exports = attachOperationIds(spec);
+
+function attachOperationIds(spec) {
+    var ret = fp.deepcopy(spec);
+
+    ret.paths = fp.map(function(k, v) {
+        return fp.map(function(k, v) {
+            v.operationId = k + v.summary;
+
+            return v;
+        }, v);
+    }, ret.paths);
+
+    return ret;
+}
