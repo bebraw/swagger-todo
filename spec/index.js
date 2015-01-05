@@ -11,6 +11,7 @@ module.exports = {
     },
     'host': config.ip + ':' + config.port,
     'schemes': [
+        'http', // TODO: disable in production
         'https'
     ],
     'basePath': '/v1',
