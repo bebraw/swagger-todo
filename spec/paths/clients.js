@@ -31,7 +31,13 @@ module.exports = {
         'description': 'The Clients endpoint allows you to create a new client to the system.\n',
         'parameters': [
             {
-                '$ref': '#/definitions/Client'
+                'name': 'body',
+                'in': 'body',
+                'description': 'The Client JSON you want to POST',
+                'schema': {
+                    '$ref': '#/definitions/Client'
+                },
+                'required': true
             }
         ],
         'tags': [
@@ -57,7 +63,13 @@ module.exports = {
         'description': 'The Clients endpoint allows you to update a client already existing in the system.\n',
         'parameters': [
             {
-                '$ref': '#/definitions/Client'
+                'name': 'body',
+                'in': 'body',
+                'description': 'The Client JSON you want to PUT',
+                'schema': {
+                    '$ref': '#/definitions/Client'
+                },
+                'required': true
             }
         ],
         'tags': [

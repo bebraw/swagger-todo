@@ -31,7 +31,13 @@ module.exports = {
         'description': 'The Invoices endpoint allows you to create a new client to the system.\n',
         'parameters': [
             {
-                '$ref': '#/definitions/Invoice'
+                'name': 'body',
+                'in': 'body',
+                'description': 'The Invoice JSON you want to POST',
+                'schema': {
+                    '$ref': '#/definitions/Invoice'
+                },
+                'required': true
             }
         ],
         'tags': [
@@ -57,7 +63,13 @@ module.exports = {
         'description': 'The Invoices endpoint allows you to update an invoice already existing in the system.\n',
         'parameters': [
             {
-                '$ref': '#/definitions/Invoice'
+                'name': 'body',
+                'in': 'body',
+                'description': 'The Invoice JSON you want to PUT',
+                'schema': {
+                    '$ref': '#/definitions/Invoice'
+                },
+                'required': true
             }
         ],
         'tags': [
