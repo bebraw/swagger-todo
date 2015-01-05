@@ -24,17 +24,17 @@ function main() {
     }
 
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.urlencoded({
+        extended: false
+    }));
 
     app.use('/v1/', swagger.router(spec, handlers));
 
     app.use(function(req, res, next) {
         var err = new Error('Not Found');
-        err.status = 404;
-        next(err);
-    });
 
-    app.use(function(err, req, res) {
+        err.status = 404;
+
         res.status(err.status || 500).json({
             message: err.message,
             error: err
