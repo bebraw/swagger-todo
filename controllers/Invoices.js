@@ -1,7 +1,8 @@
 'use strict';
+var swaggerify = require('./swaggerify');
 
 
-module.exports = {
+module.exports = swaggerify('Invoices', {
     get: function(req, res) {
         res.json({id: 1});
     },
@@ -11,4 +12,4 @@ module.exports = {
     put: function(req, res) {
         res.json({id: 1});
     }
-};
+});
