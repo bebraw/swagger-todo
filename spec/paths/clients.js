@@ -1,0 +1,80 @@
+'use strict';
+
+module.exports = {
+    'get': {
+        'summary': 'Clients',
+        'description': 'The Clients endpoint returns information about clients the user is affiliated with. The response includes basic details of each client, such as name, in chronological order.\n',
+        'tags': [
+            'Clients'
+        ],
+        'responses': {
+            '200': {
+                'description': 'An array of clients',
+                'schema': {
+                    'type': 'array',
+                    'items': {
+                        '$ref': '#/definitions/Client'
+                    }
+                }
+            },
+            'default': {
+                'description': 'Unexpected error',
+                'schema': {
+                    '$ref': '#/definitions/Error'
+                }
+            }
+        }
+    },
+    'post': {
+        'summary': 'Clients',
+        'description': 'The Clients endpoint allows you to create a new client to the system.\n',
+        'parameters': [
+            {
+                '$ref': '#/definitions/Client'
+            }
+        ],
+        'tags': [
+            'Clients'
+        ],
+        'responses': {
+            '200': {
+                'description': 'Id of the created client',
+                'schema': {
+                    '$ref': '#/definitions/Id'
+                }
+            },
+            'default': {
+                'description': 'Unexpected error',
+                'schema': {
+                    '$ref': '#/definitions/Error'
+                }
+            }
+        }
+    },
+    'put': {
+        'summary': 'Clients',
+        'description': 'The Clients endpoint allows you to update a client already existing in the system.\n',
+        'parameters': [
+            {
+                '$ref': '#/definitions/Client'
+            }
+        ],
+        'tags': [
+            'Clients'
+        ],
+        'responses': {
+            '200': {
+                'description': 'Id of the updated client',
+                'schema': {
+                    '$ref': '#/definitions/Id'
+                }
+            },
+            'default': {
+                'description': 'Unexpected error',
+                'schema': {
+                    '$ref': '#/definitions/Error'
+                }
+            }
+        }
+    }
+};
