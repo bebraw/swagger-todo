@@ -1,4 +1,5 @@
 'use strict';
+var config = require('../config');
 
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
         'description': 'Manage your clients and invoices using Koodilehto CRM API',
         'version': '1.0.0'
     },
-    'host': 'api.koodilehto.fi',
+    'host': config.ip + ':' + config.port,
     'schemes': [
         'https'
     ],
