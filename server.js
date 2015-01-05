@@ -30,7 +30,7 @@ function main() {
 
     app.use('/v1/', swagger.router(spec, handlers));
 
-    app.use(function(req, res, next) {
+    app.use(function(req, res) {
         var err = new Error('Not Found');
 
         err.status = 404;
