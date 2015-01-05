@@ -35,7 +35,7 @@ module.exports = {
             }
         },
         'due': {
-            'type': 'string',
+            'type': 'date',
             'description': 'Day in which the invoice is due'
         },
         'paymentDays': {
