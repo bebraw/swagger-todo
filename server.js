@@ -31,13 +31,9 @@ function main() {
     app.use('/v1/', swagger.router(spec, handlers));
 
     app.use(function(req, res) {
-        var err = new Error('Not Found');
-
-        err.status = 404;
-
-        res.status(err.status || 500).json({
-            message: err.message,
-            error: err
+        res.status(404).json({
+            message: 'Not Found',
+            error: {}
         });
     });
 
