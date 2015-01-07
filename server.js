@@ -5,16 +5,9 @@ var errorHandler = require('errorhandler');
 var bodyParser = require('body-parser');
 var swaggerTools = require('swagger-tools');
 
-var config = require('./config');
 
-
-main();
-
-function main() {
+module.exports = function(cb) {
     var app = express();
-
-    var ip = config.ip;
-    var port = config.port;
 
     var env = process.env.NODE_ENV || 'development';
     if(env === 'development') {
@@ -53,11 +46,9 @@ function main() {
             process.on(element, function() { terminator(element); });
         });
 
-        app.listen(port, ip, function() {
-            console.log('Node (version: %s) %s started on %s:%d ...', process.version, process.argv[1], ip, port);
-        });
+        cb(app);
     });
-}
+};
 
 function terminator(sig) {
     if(typeof sig === 'string') {
