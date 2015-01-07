@@ -2,6 +2,6 @@
 
 
 module.exports = {
-    'type': 'string',
+    'type': 'number',
     'description': 'Unique identifier'
 };

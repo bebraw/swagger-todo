@@ -43,6 +43,18 @@ module.exports = {
             'type': 'number',
             'description': 'Amount of days to pay the bill',
             'default': 8
+        },
+        'createdAt': {
+            'type': 'string',
+            'format': 'date',
+            'description': 'Day in which the invoice was created at',
+            'readOnly': true
+        },
+        'updatedAt': {
+            'type': 'string',
+            'format': 'date',
+            'description': 'Day in which the invoice was updated',
+            'readOnly': true
         }
     }
 };
