@@ -42,13 +42,13 @@ module.exports = {
         },
         'createdAt': {
             'type': 'string',
-            'format': 'date',
+            'format': 'datetime',
             'description': 'Day in which the invoice was created at',
             'readOnly': true
         },
         'updatedAt': {
             'type': 'string',
-            'format': 'date',
+            'format': 'datetime',
             'description': 'Day in which the invoice was updated',
             'readOnly': true
         }
