@@ -4,7 +4,7 @@ var swaggerify = require('./swaggerify');
 var Invoice = require('../models').Invoice;
 
 
-module.exports = swaggerify('Invoices', {
+module.exports = swaggerify('invoice', {
     get: function(req, res) {
         Invoice.findAll().then(function(invoices) {
             res.json(invoices);

@@ -4,7 +4,7 @@ var swaggerify = require('./swaggerify');
 var Client = require('../models').Client;
 
 
-module.exports = swaggerify('Clients', {
+module.exports = swaggerify('client', {
     get: function(req, res) {
         Client.findAll().then(function(clients) {
             res.json(clients);

@@ -3,11 +3,7 @@
 
 module.exports = {
     'get': {
-        'summary': 'Clients',
         'description': 'The Clients endpoint returns information about clients the user is affiliated with. The response includes basic details of each client, such as name, in chronological order.\n',
-        'tags': [
-            'Clients'
-        ],
         'responses': {
             '200': {
                 'description': 'An array of clients',
@@ -27,7 +23,6 @@ module.exports = {
         }
     },
     'post': {
-        'summary': 'Clients',
         'description': 'The Clients endpoint allows you to create a new client to the system.\n',
         'parameters': [
             {
@@ -39,9 +34,6 @@ module.exports = {
                 },
                 'required': true
             }
-        ],
-        'tags': [
-            'Clients'
         ],
         'responses': {
             '200': {
@@ -59,7 +51,6 @@ module.exports = {
         }
     },
     'put': {
-        'summary': 'Clients',
         'description': 'The Clients endpoint allows you to update a client already existing in the system.\n',
         'parameters': [
             {
@@ -71,9 +62,6 @@ module.exports = {
                 },
                 'required': true
             }
-        ],
-        'tags': [
-            'Clients'
         ],
         'responses': {
             '200': {
