@@ -56,7 +56,8 @@ module.exports = function(cb) {
             });
         });
 
-        app.use(function(err, req, res) {
+        // important! Do not eliminate `next` as that will disable error handling
+        app.use(function(err, req, res, next) {
             res.status(403).json({
                 message: err.code,
                 error: err.results.errors
