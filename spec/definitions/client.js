@@ -5,35 +5,35 @@ module.exports = {
     'properties': {
         'id': require('./id'),
         'name': {
-            'type': 'string',
+            'type': ['string', 'null'],
             'description': 'Name of the client'
         },
         'address': {
-            'type': 'string',
+            'type': ['string', 'null'],
             'description': 'Address of the client'
         },
         'city': {
-            'type': 'string',
+            'type': ['string', 'null'],
             'description': 'City of the client'
         },
         'postalCode': {
-            'type': 'string',
+            'type': ['string', 'null'],
             'description': 'Postal code of the client'
         },
         'phone': {
-            'type': 'string',
+            'type': ['string', 'null'],
             'description': 'Phone number of the client'
         },
         'companyId': {
-            'type': 'string',
+            'type': ['string', 'null'],
             'description': 'Company id of the client'
         },
         'iban': {
-            'type': 'string',
+            'type': ['string', 'null'],
             'description': 'IBAN code of the client'
         },
         'bic': {
-            'type': 'string',
+            'type': ['string', 'null'],
             'description': 'BIC/SWIFT code of the client'
         },
         'language': {
