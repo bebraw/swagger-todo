@@ -9,7 +9,7 @@ function swaggerify(modules) {
     var ret = {};
 
     fp.each(function(name, paths) {
-        ret['/' + name] = fp.map(function(path, definition) {
+        ret['/' + name + 's'] = fp.map(function(path, definition) {
             definition['x-swagger-router-controller'] = name;
             definition.operationId = path + upperCaseFirst(name);
             definition.tags = [name];
