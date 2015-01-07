@@ -6,7 +6,9 @@ var models  = require('../models');
 
 module.exports = swaggerify('Clients', {
     get: function(req, res) {
-        res.json({id: 1});
+        models.Client.findAll().then(function(clients) {
+            res.json(clients);
+        });
     },
     post: function(req, res) {
         var body = req.swagger.params.body.value;
