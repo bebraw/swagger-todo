@@ -1,23 +1,46 @@
 'use strict';
 var swaggerify = require('./swaggerify');
 
+var Invoice = require('../models').Invoice;
+
 
 module.exports = swaggerify('Invoices', {
     get: function(req, res) {
-        res.json({id: 1});
+        Invoice.findAll().then(function(invoices) {
+            res.json(invoices);
+        });
     },
     post: function(req, res) {
         var body = req.swagger.params.body.value;
 
-        console.log('at post invoice', body);
-
-        res.json({id: 1});
+        Invoice.create(body).then(function(invoice) {
+            res.json({
+                id: invoice.dataValues.id
+            });
+        });
     },
     put: function(req, res) {
         var body = req.swagger.params.body.value;
+        var id = body.id;
 
-        console.log('at put invoice', body);
+        delete body.id;
 
-        res.json({id: 1});
+        Invoice.update(body, {
+            where: {
+                id: id
+            }
+        }).then(function(ids) {
+            var id = ids[0];
+
+            if(id) {
+                res.json({id: id});
+            }
+            else {
+                // TODO: specify this case better
+                res.status(403).json({
+                    message: 'NOT_FOUND'
+                });
+            }
+        });
     }
 });
