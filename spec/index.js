@@ -1,5 +1,6 @@
 'use strict';
 var config = require('../config');
+var version = require('../package.json').version;
 
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
     info: {
         title: 'Koodilehto CRM API',
         description: 'Manage your clients and invoices using Koodilehto CRM API',
-        version: '1.0.0'
+        version: version
     },
     host: config.ip + ':' + config.port,
     schemes: [
