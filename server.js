@@ -29,7 +29,10 @@ module.exports = function(cb) {
             useStubs: process.env.NODE_ENV === 'development'
         }));
 
-        app.use(middleware.swaggerUi());
+        app.use(middleware.swaggerUi({
+            apiDocs: '/v1/schema',
+            swaggerUi: '/v1/docs'
+        }));
 
         app.use(function(req, res) {
             res.status(404).json({
