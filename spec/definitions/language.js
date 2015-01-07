@@ -3,8 +3,7 @@
 
 module.exports = {
     'properties': {
-        'id': require('./id'),
-        'name': {
+        'code': {
             'type': 'string',
             'enum': [
                 'en-en',
