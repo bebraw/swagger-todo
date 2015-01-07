@@ -2,7 +2,7 @@
   "name": "koodilehto-crm-backend",
   "description": "",
   "author": "Juho Vepsalainen <bebraw@gmail.com>",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "annofp": "^0.3.0",
     "body-parser": "^1.10.0",
