@@ -16,40 +16,31 @@ module.exports = {
     'properties': {
         'id': require('./id'),
         'name': {
-            'type': 'string',
-            'description': 'Name of the client'
+            'type': 'string'
         },
         'address': {
-            'type': 'string',
-            'description': 'Address of the client'
+            'type': 'string'
         },
         'city': {
-            'type': 'string',
-            'description': 'City of the client'
+            'type': 'string'
         },
         'postalCode': {
-            'type': 'string',
-            'description': 'Postal code of the client'
+            'type': 'string'
         },
         'phone': {
-            'type': 'string',
-            'description': 'Phone number of the client'
+            'type': 'string'
         },
-        'companyId': {
-            'type': 'string',
-            'description': 'Company id of the client'
+        'companyId': { // XXX: this should be a reference to a client
+            'type': 'string'
         },
         'iban': {
-            'type': 'string',
-            'description': 'IBAN code of the client'
+            'type': 'string'
         },
         'bic': {
-            'type': 'string',
-            'description': 'BIC/SWIFT code of the client'
+            'type': 'string'
         },
         'language': {
-            '$ref': '#/definitions/Language',
-            'description': 'Language of the client'
+            '$ref': '#/definitions/Language'
         },
         'createdAt': {
             'type': 'string',

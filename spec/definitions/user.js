@@ -5,8 +5,7 @@ module.exports = {
     'properties': {
         'id': require('./id'),
         'name': {
-            'type': 'string',
-            'description': 'Full name of the user'
+            'type': 'string'
         },
         'invoicingId': {
             'type': 'number',

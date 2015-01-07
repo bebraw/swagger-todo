@@ -4,17 +4,14 @@
 module.exports = {
     'properties': {
         'description': {
-            'type': 'string',
-            'description': 'Description of the item to invoice'
+            'type': 'string'
         },
         'cost': {
-            'type': 'number',
-            'description': 'Basic cost of the item to invoice'
+            'type': 'number'
         },
         'vat': {
             'default': 0,
-            'type': 'number',
-            'description': 'Possible VAT of the item to invoice. Defaults to zero.'
+            'type': 'number'
         }
     }
 };

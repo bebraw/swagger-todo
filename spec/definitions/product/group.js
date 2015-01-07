@@ -9,12 +9,10 @@ module.exports = {
     'properties': {
         'id': require('../id'),
         'name': {
-            'type': 'string',
-            'description': 'Name of the product group'
+            'type': 'string'
         },
         'description': {
-            'type': 'string',
-            'description': 'Description of the product group'
+            'type': 'string'
         },
         'createdAt': {
             'type': 'string',

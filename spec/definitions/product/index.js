@@ -15,20 +15,16 @@ module.exports = {
     'properties': {
         'id': require('../id'),
         'name': {
-            'type': 'string',
-            'description': 'Name of the product'
+            'type': 'string'
         },
         'description': {
-            'type': 'string',
-            'description': 'Description of the product'
+            'type': 'string'
         },
         'purchasePrice': {
-            'type': 'number',
-            'description': 'Purchase price of the product'
+            'type': 'number'
         },
         'sellingPrice': {
-            'type': 'number',
-            'description': 'Selling price of the product'
+            'type': 'number'
         },
         'priceChanged': {
             'type': 'string',
@@ -40,8 +36,7 @@ module.exports = {
             'description': 'VAT of the product'
         },
         'group': {
-            '$ref': '#/definitions/ProductGroup',
-            'description': 'Group of the product'
+            '$ref': '#/definitions/ProductGroup'
         },
         'inStock': {
             'type': 'boolean',

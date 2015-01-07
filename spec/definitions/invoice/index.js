@@ -28,7 +28,6 @@ module.exports = {
         },
         'items': {
             'type': 'array',
-            'description': 'Billable items attached to the invoice',
             'minItems': 1,
             'items': {
                 '$ref': '#/definitions/InvoiceItem'
