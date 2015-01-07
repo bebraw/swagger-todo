@@ -53,7 +53,7 @@ module.exports = function(cb) {
             });
         });
 
-        app.use(function(err, req, res, next){
+        app.use(function(err, req, res) {
             res.status(403).json({
                 message: err.code,
                 error: err.results.errors
