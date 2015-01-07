@@ -36,7 +36,7 @@ module.exports = function(cb) {
         }));
 
         app.use(middleware.swaggerValidator({
-            validateResponse: false // TODO: enable
+            validateResponse: true
         }));
 
         app.use(middleware.swaggerRouter({
