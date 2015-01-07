@@ -19,6 +19,12 @@ module.exports = {
     produces: [
         'application/json'
     ],
+    security: [
+        {
+            apikey: []
+        }
+    ],
     paths: require('./paths'),
     definitions: require('./definitions'),
+    securityDefinitions: require('./security_definitions')
 };

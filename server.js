@@ -5,6 +5,8 @@ var errorHandler = require('errorhandler');
 var bodyParser = require('body-parser');
 var swaggerTools = require('swagger-tools');
 
+var apikey = require('./config').apikey;
+
 
 module.exports = function(cb) {
     var app = express();
@@ -23,6 +25,16 @@ module.exports = function(cb) {
     swaggerTools.initializeMiddleware(require('./spec'), function(middleware) {
         app.use(middleware.swaggerMetadata());
         app.use(middleware.swaggerValidator());
+
+        app.use(middleware.swaggerSecurity({
+            apikey: function(req, authOrSecDef, scopes, cb) {
+                if(req.headers['x-auth-token'] === apikey) {
+                    return cb();
+                }
+
+                cb(new Error('Failed to authenticate'));
+            }
+        }));
 
         app.use(middleware.swaggerRouter({
             controllers: './controllers',
