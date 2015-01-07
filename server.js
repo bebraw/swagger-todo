@@ -33,7 +33,7 @@ module.exports = function(cb) {
 
         app.use(function(req, res) {
             res.status(404).json({
-                message: 'Not Found',
+                message: 'NOT_FOUND',
                 error: {}
             });
         });

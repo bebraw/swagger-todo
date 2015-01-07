@@ -1,19 +1,19 @@
 'use strict';
 var swaggerify = require('./swaggerify');
 
-var models  = require('../models');
+var Client = require('../models').Client;
 
 
 module.exports = swaggerify('Clients', {
     get: function(req, res) {
-        models.Client.findAll().then(function(clients) {
+        Client.findAll().then(function(clients) {
             res.json(clients);
         });
     },
     post: function(req, res) {
         var body = req.swagger.params.body.value;
 
-        models.Client.create(body).then(function(client) {
+        Client.create(body).then(function(client) {
             res.json({
                 id: client.dataValues.id
             });
@@ -21,9 +21,26 @@ module.exports = swaggerify('Clients', {
     },
     put: function(req, res) {
         var body = req.swagger.params.body.value;
+        var id = body.id;
 
-        console.log('at put client', body);
+        delete body.id;
 
-        res.json({id: 1});
+        Client.update(body, {
+            where: {
+                id: id
+            }
+        }).then(function(ids) {
+            var id = ids[0];
+
+            if(id) {
+                res.json({id: id});
+            }
+            else {
+                // TODO: specify this case better
+                res.status(403).json({
+                    message: 'NOT_FOUND'
+                });
+            }
+        });
     }
 });
