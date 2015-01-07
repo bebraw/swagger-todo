@@ -41,6 +41,13 @@ module.exports = function(cb) {
             });
         });
 
+        app.use(function(err, req, res, next){
+            res.status(403).json({
+                message: err.code,
+                error: err.results.errors
+            });
+        });
+
         process.on('exit', terminator);
 
         ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT', 'SIGBUS',
