@@ -24,7 +24,6 @@ module.exports = function(cb) {
     // https://github.com/apigee-127/swagger-tools/blob/master/docs/QuickStart.md
     swaggerTools.initializeMiddleware(require('./spec'), function(middleware) {
         app.use(middleware.swaggerMetadata());
-        app.use(middleware.swaggerValidator());
 
         app.use(middleware.swaggerSecurity({
             apikey: function(req, authOrSecDef, scopes, cb) {
@@ -34,6 +33,10 @@ module.exports = function(cb) {
 
                 cb(new Error('Failed to authenticate'));
             }
+        }));
+
+        app.use(middleware.swaggerValidator({
+            validateResponse: false // TODO: enable
         }));
 
         app.use(middleware.swaggerRouter({
