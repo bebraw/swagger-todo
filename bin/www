@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-var debug = require('debug')('koodilehto-crm');
+var debug = require('debug')('swagger-todo');
 
 var config = require('../config');
 var models = require('../models');

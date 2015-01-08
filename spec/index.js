@@ -6,8 +6,8 @@ var version = require('../package.json').version;
 module.exports = {
     swagger: '2.0',
     info: {
-        title: 'Koodilehto CRM API',
-        description: 'Manage your clients and invoices using Koodilehto CRM API',
+        title: 'Swagger Todo API',
+        description: 'Manage your todos using this API',
         version: version
     },
     host: config.ip + ':' + config.port,
