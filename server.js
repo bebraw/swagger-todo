@@ -43,7 +43,7 @@ module.exports = function(cb) {
                 if(authorization) {
                     var parts = req.headers.authorization.split(' ');
 
-                    if(parts.length == 2) {
+                    if(parts.length === 2) {
                         var scheme = parts[0];
                         var credentials = parts[1];
 
