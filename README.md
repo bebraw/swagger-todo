@@ -6,6 +6,8 @@ Swagger TODO backend example.
 
 ## Usage
 
+> NOTE! UI is broken at the moment as auth relies on jwt now. There is however a simple test case showing how to authenticate and access the UI, though.
+
 1. `npm install`
 2. `npm start`. If you want to restart server automatically during development, hit `node-dev bin/www` (expects [node-dev](https://www.npmjs.org/package/node-dev))
 3. Surf to `http://localhost:3000/v1/docs/` for API navigator
@@ -14,8 +16,6 @@ Swagger TODO backend example.
 6. Perform operations. You could start with a POST. Note that you have to format POST body within a JSON string. Ie. `{"name": "demo"}` would work.
 
 In case you want to modify the configuration of the project, you can either set environment variables (first priority) or copy `config/config.template.js` as `config/config.js` and do needed adjustments there. If you want to mute `Failed to find value` warnings, set `MUTE_PARSE_ENV` to true.
-
-You should not use this authentication scheme in production. Instead you should use something like [jwt](http://jwt.io/) to generate safe tokens and run the whole system over https.
 
 ## License
 

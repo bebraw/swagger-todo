@@ -6,7 +6,7 @@ var host = '127.0.0.1';
 module.exports = {
     port: 3000,
     ip: host,
-    apikey: 'apikey', // XXX: this should be generalized
+    jwtSecret: 'replacethis',
     database: {
         development: {
             dialect: 'sqlite',

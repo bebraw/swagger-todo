@@ -6,8 +6,10 @@ var errorHandler = require('errorhandler');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swaggerTools = require('swagger-tools');
+var expressJwt = require('express-jwt');
 
-var apikey = require('./config').apikey;
+var auth = require('./routes/auth');
+var config = require('./config');
 
 
 module.exports = function(cb) {
@@ -26,19 +28,22 @@ module.exports = function(cb) {
         extended: false
     }));
 
+    app.use(auth());
+
     // https://github.com/apigee-127/swagger-tools/blob/master/docs/QuickStart.md
     swaggerTools.initializeMiddleware(require('./spec'), function(middleware) {
         app.use(middleware.swaggerMetadata());
 
-        app.use(middleware.swaggerSecurity({
-            apikey: function(req, authOrSecDef, scopes, cb) {
-                if(req.query['api_key'] === apikey) {
-                    return cb();
-                }
+        app.use('/v1', expressJwt({
+            secret: config.jwtSecret
+        }).unless({
+            path: ['/v1/docs', '/v1/docs/', '/v1/schema', '/v1/schema/'],
+            ext: ['js', 'css', 'html']
+        }), function(req, res, next) {
+            app.get('debug')('user ' + req.user.email + 'authenticated');
 
-                cb(new Error('Failed to authenticate'));
-            }
-        }));
+            next();
+        });
 
         app.use(middleware.swaggerValidator({
             validateResponse: false
