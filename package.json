@@ -3,7 +3,7 @@
   "description": "",
   "author": "Juho Vepsalainen <bebraw@gmail.com>",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependencies": {
     "annofp": "^0.3.0",
     "body-parser": "^1.10.0",
