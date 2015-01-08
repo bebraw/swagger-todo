@@ -19,6 +19,12 @@ module.exports = {
     produces: [
         'application/json'
     ],
+    security: [
+        {
+            jwt: []
+        }
+    ],
     paths: require('./paths'),
-    definitions: require('./definitions')
+    definitions: require('./definitions'),
+    securityDefinitions: require('./security_definitions')
 };

@@ -6,7 +6,7 @@ var errorHandler = require('errorhandler');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swaggerTools = require('swagger-tools');
-var expressJwt = require('express-jwt');
+var jwt = require('jsonwebtoken');
 
 var auth = require('./routes/auth');
 var config = require('./config');
@@ -34,16 +34,44 @@ module.exports = function(cb) {
     swaggerTools.initializeMiddleware(require('./spec'), function(middleware) {
         app.use(middleware.swaggerMetadata());
 
-        app.use('/v1', expressJwt({
-            secret: config.jwtSecret
-        }).unless({
-            path: ['/v1/docs', '/v1/docs/', '/v1/schema', '/v1/schema/'],
-            ext: ['js', 'css', 'html']
-        }), function(req, res, next) {
-            app.get('debug')('user ' + req.user.email + 'authenticated');
+        app.use(middleware.swaggerSecurity({
+            // adapted from express-jwt middleware
+            jwt: function(req, authOrSecDef, scopes, cb) {
+                var authorization = req.headers.authorization;
+                var token;
 
-            next();
-        });
+                if(authorization) {
+                    var parts = req.headers.authorization.split(' ');
+
+                    if(parts.length == 2) {
+                        var scheme = parts[0];
+                        var credentials = parts[1];
+
+                        if(/^Bearer$/i.test(scheme)) {
+                            token = credentials;
+
+                            console.log('token', token);
+                        }
+                        else {
+                            cb(new Error('Format is Authorization: Bearer [token]'));
+                        }
+                    }
+                }
+
+                if(token) {
+                    jwt.verify(token, config.jwtSecret, {}, function(err) {
+                        if(err) {
+                            return cb(new Error('Invalid token'));
+                        }
+
+                        cb();
+                    });
+                }
+                else {
+                    cb(new Error('No authorization token was found'));
+                }
+            }
+        }));
 
         app.use(middleware.swaggerValidator({
             validateResponse: false
