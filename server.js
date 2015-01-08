@@ -30,9 +30,6 @@ module.exports = function(cb) {
 
         app.use(middleware.swaggerSecurity({
             apikey: function(req, authOrSecDef, scopes, cb) {
-                console.log('authenticating', req.query && req.query['api-key']);
-                console.log(req.query, req.params, req.body);
-
                 if(req.query['api_key'] === apikey) {
                     return cb();
                 }
