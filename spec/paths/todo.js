@@ -3,14 +3,14 @@
 
 module.exports = {
     'get': {
-        'description': 'The Clients endpoint returns information about clients the user is affiliated with. The response includes basic details of each client, such as name, in chronological order.\n',
+        'description': 'Get available Todos',
         'responses': {
             '200': {
-                'description': 'An array of clients',
+                'description': 'An array of todos',
                 'schema': {
                     'type': 'array',
                     'items': {
-                        '$ref': '#/definitions/Client'
+                        '$ref': '#/definitions/Todo'
                     }
                 }
             },
@@ -23,21 +23,21 @@ module.exports = {
         }
     },
     'post': {
-        'description': 'The Clients endpoint allows you to create a new client to the system.\n',
+        'description': 'Create a new Todo',
         'parameters': [
             {
                 'name': 'body',
                 'in': 'body',
-                'description': 'The Client JSON you want to POST',
+                'description': 'Todo JSON you want to POST',
                 'schema': {
-                    '$ref': '#/definitions/Client'
+                    '$ref': '#/definitions/Todo'
                 },
                 'required': true
             }
         ],
         'responses': {
             '200': {
-                'description': 'Id of the created client',
+                'description': 'Id of the created Todo',
                 'schema': {
                     '$ref': '#/definitions/Id'
                 }
@@ -51,21 +51,21 @@ module.exports = {
         }
     },
     'put': {
-        'description': 'The Clients endpoint allows you to update a client already existing in the system.\n',
+        'description': 'Update a Todo',
         'parameters': [
             {
                 'name': 'body',
                 'in': 'body',
-                'description': 'The Client JSON you want to PUT',
+                'description': 'Todo JSON you want to PUT',
                 'schema': {
-                    '$ref': '#/definitions/Client'
+                    '$ref': '#/definitions/Todo'
                 },
                 'required': true
             }
         ],
         'responses': {
             '200': {
-                'description': 'Id of the updated client',
+                'description': 'Id of the updated Todo',
                 'schema': {
                     '$ref': '#/definitions/Id'
                 }

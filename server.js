@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var cors = require('cors');
 var errorHandler = require('errorhandler');
 var bodyParser = require('body-parser');
 var swaggerTools = require('swagger-tools');
@@ -16,6 +17,8 @@ module.exports = function(cb) {
         app.use(errorHandler());
     }
 
+    app.use(cors());
+
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
         extended: false
@@ -27,7 +30,10 @@ module.exports = function(cb) {
 
         app.use(middleware.swaggerSecurity({
             apikey: function(req, authOrSecDef, scopes, cb) {
-                if(req.headers['x-auth-token'] === apikey) {
+                console.log('authenticating', req.query && req.query['api-key']);
+                console.log(req.query, req.params, req.body);
+
+                if(req.query['api_key'] === apikey) {
                     return cb();
                 }
 
@@ -36,7 +42,7 @@ module.exports = function(cb) {
         }));
 
         app.use(middleware.swaggerValidator({
-            validateResponse: true
+            validateResponse: false
         }));
 
         app.use(middleware.swaggerRouter({
@@ -60,7 +66,7 @@ module.exports = function(cb) {
         app.use(function(err, req, res, next) {
             res.status(403).json({
                 message: err.code,
-                error: err.results.errors
+                error: err.results && err.results.errors
             });
         });
 

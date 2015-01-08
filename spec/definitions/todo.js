@@ -3,27 +3,26 @@
 
 module.exports = {
     'required': [
-        'name',
-        'description'
+        'name'
     ],
     'properties': {
-        'id': require('../id'),
+        'id': require('./id'),
         'name': {
             'type': 'string'
         },
-        'description': {
-            'type': 'string'
+        'done': {
+            'type': 'boolean'
         },
         'createdAt': {
             'type': 'string',
             'format': 'date-time',
-            'description': 'Day in which the group was created at',
+            'description': 'Day in which the Todo was created',
             'readOnly': true
         },
         'updatedAt': {
             'type': 'string',
             'format': 'date-time',
-            'description': 'Day in which the group was updated',
+            'description': 'Day in which the Todo was updated',
             'readOnly': true
         }
     }

@@ -2,6 +2,6 @@
 
 module.exports = {
     type: 'apiKey',
-    in: 'header',
-    name: 'x-auth-token'
+    in: 'query',
+    name: 'api_key'
 };

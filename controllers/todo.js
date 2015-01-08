@@ -1,21 +1,21 @@
 'use strict';
 var swaggerify = require('./swaggerify');
 
-var Client = require('../models').Client;
+var Todo = require('../models').Todo;
 
 
-module.exports = swaggerify('client', {
+module.exports = swaggerify('todo', {
     get: function(req, res) {
-        Client.findAll().then(function(clients) {
-            res.json(clients);
+        Todo.findAll().then(function(todos) {
+            res.json(todos);
         });
     },
     post: function(req, res) {
         var body = req.swagger.params.body.value;
 
-        Client.create(body).then(function(client) {
+        Todo.create(body).then(function(todo) {
             res.json({
-                id: client.dataValues.id
+                id: todo.dataValues.id
             });
         });
     },
@@ -25,7 +25,7 @@ module.exports = swaggerify('client', {
 
         delete body.id;
 
-        Client.update(body, {
+        Todo.update(body, {
             where: {
                 id: id
             }
