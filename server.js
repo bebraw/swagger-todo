@@ -46,7 +46,7 @@ module.exports = function(cb) {
         }));
 
         app.use(middleware.swaggerRouter({
-            controllers: './controllers',
+            controllers: './routes',
             useStubs: process.env.NODE_ENV === 'development'
         }));
 
