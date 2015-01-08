@@ -3,9 +3,8 @@
 
 module.exports = {
     'properties': {
-        'error': {
-            'type': 'integer',
-            'format': 'int32'
+        'payload': {
+            'type': 'object'
         },
         'message': {
             'type': 'string'

@@ -90,15 +90,16 @@ module.exports = function(cb) {
         app.use(function(req, res) {
             res.status(404).json({
                 message: 'NOT_FOUND',
-                error: {}
+                payload: {}
             });
         });
 
         // important! Do not eliminate `next` as that will disable error handling
         app.use(function(err, req, res, next) {
+            // TODO: this should handle cases beyond 403
             res.status(403).json({
                 message: err.code,
-                error: err.results && err.results.errors
+                payload: err.results && err.results.errors
             });
         });
 
