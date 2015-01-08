@@ -3,6 +3,7 @@
 var express = require('express');
 var cors = require('cors');
 var errorHandler = require('errorhandler');
+var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swaggerTools = require('swagger-tools');
 
@@ -15,6 +16,7 @@ module.exports = function(cb) {
     var env = process.env.NODE_ENV || 'development';
     if(env === 'development') {
         app.use(errorHandler());
+        app.use(morgan('dev'));
     }
 
     app.use(cors());
