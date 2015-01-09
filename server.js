@@ -6,10 +6,10 @@ var errorHandler = require('errorhandler');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swaggerTools = require('swagger-tools');
-var jwt = require('jsonwebtoken');
 
 var auth = require('./routes/auth');
 var config = require('./config');
+var jwt = require('./lib/jwt');
 
 
 module.exports = function(cb) {
@@ -35,41 +35,8 @@ module.exports = function(cb) {
         app.use(middleware.swaggerMetadata());
 
         app.use(middleware.swaggerSecurity({
-            // adapted from express-jwt middleware
             jwt: function(req, authOrSecDef, scopes, cb) {
-                var authorization = req.headers.authorization;
-                var token;
-
-                if(authorization) {
-                    var parts = req.headers.authorization.split(' ');
-
-                    if(parts.length === 2) {
-                        var scheme = parts[0];
-                        var credentials = parts[1];
-
-                        if(/^Bearer$/i.test(scheme)) {
-                            token = credentials;
-
-                            console.log('token', token);
-                        }
-                        else {
-                            cb(new Error('Format is Authorization: Bearer [token]'));
-                        }
-                    }
-                }
-
-                if(token) {
-                    jwt.verify(token, config.jwtSecret, {}, function(err) {
-                        if(err) {
-                            return cb(new Error('Invalid token'));
-                        }
-
-                        cb();
-                    });
-                }
-                else {
-                    cb(new Error('No authorization token was found'));
-                }
+                jwt(config.jwtSecret, req, cb);
             }
         }));
 
