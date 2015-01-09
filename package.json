@@ -14,7 +14,7 @@
     "morgan": "^1.5.1",
     "parse-env": "^0.3.0",
     "require-dir": "^0.1.0",
-    "sequelize": "^2.0.0-rc6",
+    "sequelize": "^2.0.0-rc7",
     "sqlite3": "^3.0.4",
     "swagger-tools": "^0.7.4",
     "swaggerify": "^0.1.2",
