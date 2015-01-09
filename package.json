@@ -18,7 +18,8 @@
     "require-dir": "^0.1.0",
     "sequelize": "^2.0.0-rc6",
     "sqlite3": "^3.0.4",
-    "swagger-tools": "^0.7.4"
+    "swagger-tools": "^0.7.4",
+    "t1000": "^0.1.0"
   },
   "devDependencies": {
     "axios": "^0.4.2"

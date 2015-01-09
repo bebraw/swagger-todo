@@ -6,11 +6,11 @@ var errorHandler = require('errorhandler');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swaggerTools = require('swagger-tools');
+var terminator = require('t1000');
 
 var auth = require('./routes/auth');
 var config = require('./config');
 var jwt = require('./lib/jwt');
-var terminator = require('./lib/terminator');
 
 
 module.exports = function(cb) {
