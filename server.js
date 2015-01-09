@@ -11,6 +11,7 @@ var terminator = require('t1000');
 var auth = require('./routes/auth');
 var config = require('./config');
 var jwt = require('./lib/jwt');
+var spec = require('./spec');
 
 
 module.exports = function(cb) {
@@ -32,7 +33,7 @@ module.exports = function(cb) {
     app.use(auth());
 
     // https://github.com/apigee-127/swagger-tools/blob/master/docs/QuickStart.md
-    swaggerTools.initializeMiddleware(require('./spec'), function(middleware) {
+    swaggerTools.initializeMiddleware(spec, function(middleware) {
         app.use(middleware.swaggerMetadata());
 
         app.use(middleware.swaggerSecurity({
