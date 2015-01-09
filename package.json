@@ -19,7 +19,7 @@
     "sequelize": "^2.0.0-rc6",
     "sqlite3": "^3.0.4",
     "swagger-tools": "^0.7.4",
-    "swaggerify": "^0.1.1",
+    "swaggerify": "^0.1.2",
     "t1000": "^0.1.0"
   },
   "devDependencies": {
