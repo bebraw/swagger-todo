@@ -6,7 +6,7 @@ var sentenceCase = changeCase.sentenceCase;
 var fp = require('annofp');
 
 
-module.exports = swaggerify(require('require-dir')('.', {recurse: true}));
+module.exports = swaggerify(require('require-dir')());
 
 
 function swaggerify(modules) {
