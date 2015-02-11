@@ -4,21 +4,28 @@
 var debug = require('debug')('swagger-todo');
 
 var config = require('../config');
-var models = require('../models');
+var env = process.env.NODE_ENV || 'development';
+var models = require('../models')(config.database[env]);
 var server = require('../server');
 
 
-server(function(app) {
+server({
+    models: models,
+    logExtra: env === 'development',
+    useStubs: env === 'development'
+}, function(app) {
     var ip = config.ip;
     var port = config.port;
 
     app.set('debug', debug);
     app.set('port', port);
 
-    models.sequelize.sync().then(function () {
+    models.sequelize.sync().then(function() {
         app.listen(port, ip, function() {
             console.log('Node (version: %s) %s started on %s:%d ...',
                 process.version, process.argv[1], ip, port);
         });
+    }).catch(function(err) {
+        console.error(err);
     });
 });

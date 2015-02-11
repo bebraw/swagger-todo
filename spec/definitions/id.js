@@ -2,5 +2,6 @@
 
 
 module.exports = {
-    'type': 'number'
+    type: 'integer',
+    format: 'int32'
 };

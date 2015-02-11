@@ -3,11 +3,20 @@
 
 module.exports = {
     'properties': {
-        'payload': {
-            'type': 'object'
-        },
         'message': {
             'type': 'string'
+        },
+        'errors': {
+            'type': 'array',
+            'items': {
+                'type': 'object'
+            }
+        },
+        'warnings': {
+            'type': 'array',
+            'items': {
+                'type': 'object'
+            }
         }
     }
 };

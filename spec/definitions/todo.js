@@ -11,19 +11,9 @@ module.exports = {
             'type': 'string'
         },
         'done': {
-            'type': 'boolean'
+            'type': ['boolean', 'null']
         },
-        'createdAt': {
-            'type': 'string',
-            'format': 'date-time',
-            'description': 'Day in which the Todo was created',
-            'readOnly': true
-        },
-        'updatedAt': {
-            'type': 'string',
-            'format': 'date-time',
-            'description': 'Day in which the Todo was updated',
-            'readOnly': true
-        }
+        'createdAt': require('./created'),
+        'updatedAt': require('./updated')
     }
 };

@@ -1,35 +1,43 @@
 'use strict';
 var express = require('express');
+var fp = require('annofp');
+var is = require('annois');
 var cors = require('cors');
+var helmet = require('helmet');
 var errorHandler = require('errorhandler');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swaggerTools = require('swagger-tools');
 var terminator = require('t1000');
 
-var auth = require('./routes/auth');
 var config = require('./config');
 var jwt = require('./lib/jwt');
 var spec = require('./spec');
 
 
-module.exports = function(cb) {
+module.exports = function(o, cb) {
+    var models = o.models;
+    var routes = require('./routes')({
+        models: models
+    });
+
     var app = express();
 
-    var env = process.env.NODE_ENV || 'development';
-    if(env === 'development') {
+    if(o.logExtra) {
         app.use(errorHandler());
         app.use(morgan('dev'));
     }
 
     app.use(cors());
 
+    app.use(helmet());
+
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
         extended: false
     }));
 
-    app.use(auth());
+    app.use(routes.auth());
 
     // https://github.com/apigee-127/swagger-tools/blob/master/docs/QuickStart.md
     swaggerTools.initializeMiddleware(spec, function(middleware) {
@@ -42,12 +50,12 @@ module.exports = function(cb) {
         }));
 
         app.use(middleware.swaggerValidator({
-            validateResponse: false
+            validateResponse: true
         }));
 
         app.use(middleware.swaggerRouter({
-            controllers: './routes',
-            useStubs: env === 'development'
+            controllers: getControllers(routes),
+            useStubs: o.useStubs
         }));
 
         app.use(middleware.swaggerUi({
@@ -58,17 +66,22 @@ module.exports = function(cb) {
         app.use(function(req, res) {
             res.status(404).json({
                 message: 'NOT_FOUND',
-                payload: {}
+                errors: [],
+                warnings: []
             });
         });
 
         // important! Do not eliminate `next` as that will disable error handling
         app.use(function(err, req, res, next) {
-            // TODO: this should handle cases beyond 403
-            res.status(403).json({
-                message: err.code,
-                payload: err.results && err.results.errors
-            });
+            if(err.message) {
+                return res.status(422).json({
+                    message: err.message,
+                    errors: [],
+                    warnings: []
+                });
+            }
+
+            res.status(500).json({});
         });
 
         terminator();
@@ -76,3 +89,17 @@ module.exports = function(cb) {
         cb(app);
     });
 };
+
+function getControllers(routes) {
+    var ret = {};
+
+    fp.each(function(route, v) {
+        if(is.object(v)) {
+            fp.each(function(k, v) {
+                ret[route + '_' + k] = v;
+            }, v);
+        }
+    }, routes);
+
+    return ret;
+}

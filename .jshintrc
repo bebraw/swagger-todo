@@ -16,5 +16,6 @@
   "trailing": true,
   "undef": true,
   "unused": true,
-  "sub": true
+  "sub": true,
+  "predef": ["-Promise"]
 }
