@@ -31,6 +31,7 @@
     "axios": "^0.5.0",
     "bluebird": "^2.9.12",
     "cli-color": "^0.3.2",
+    "es6-promise": "^2.0.1",
     "promise-waterfall": "^0.1.0",
     "schema2object": "^0.4.0",
     "swagger2client": "^0.1.4",
