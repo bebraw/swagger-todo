@@ -28,7 +28,9 @@ module.exports = function(o, cb) {
         app.use(morgan('dev'));
     }
 
-    app.use(cors());
+    app.use(cors({
+        exposedHeaders: ['Total-Count'],
+    }));
 
     app.use(helmet());
 
