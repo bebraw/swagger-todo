@@ -5,6 +5,7 @@ var url = require('url');
 
 var async = require('async');
 var fp = require('annofp');
+var is = require('annois');
 var axios = require('axios');
 var Promise = require('bluebird');
 var zip = require('annozip');
@@ -87,9 +88,13 @@ function getTestSuites(o) {
     var client = o.client;
     var assert = o.assert;
 
-    return fp.map(function(name, suite) {
-        return suite(assert, client);
-    }, suites);
+    return fp.filter(function(name, value) {
+        return value;
+    }, fp.map(function(name, suite) {
+        if(name.indexOf('test_') === 0 && is.fn(suite)) {
+            return suite(assert, client);
+        }
+    }, suites));
 }
 
 function getData(url, o) {
