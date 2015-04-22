@@ -22,17 +22,17 @@
     "sqlite3": "^3.0.5",
     "swagger-tools": "^0.8.5",
     "swaggerify": "^0.2.0",
-    "t1000": "^0.1.0"
+    "t1000": "^0.2.0"
   },
   "devDependencies": {
     "annogenerate": "^0.8.1",
-    "annozip": "^0.2.6",
     "async": "^0.9.0",
     "axios": "^0.5.0",
     "bluebird": "^2.9.12",
-    "cli-color": "^0.3.2",
     "es6-promise": "^2.0.1",
+    "mocha": "^2.2.4",
     "promise-waterfall": "^0.1.0",
+    "promise.prototype.finally": "^1.0.1",
     "schema2object": "^0.4.0",
     "swagger2client": "^0.1.4",
     "xtend": "^4.0.0"
@@ -47,7 +47,7 @@
   },
   "scripts": {
     "start": "node bin/www",
-    "test": "node tests"
+    "test": "mocha ./tests"
   },
   "keywords": [],
   "licenses": [

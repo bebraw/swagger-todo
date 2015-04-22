@@ -86,7 +86,9 @@ module.exports = function(o, cb) {
             res.status(500).json({});
         });
 
-        terminator();
+        if(!o.silent) {
+            terminator();
+        }
 
         cb(app);
     });

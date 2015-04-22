@@ -1,0 +1,14 @@
+{
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "no-underscore-dangle": false,
+    "no-use-before-define": false,
+    "quotes": [4, "single"],
+    "comma-dangle": "always",
+    "new-cap": false,
+    "no-unused-vars": false
+  }
+}
